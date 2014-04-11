@@ -40,13 +40,14 @@ class SMTP(object):
     """Wrapper around :py:class:`smtplib.SMTP` class."""
 
     def __init__(self, host=None, port=25, login=None, password=None,
-                 tls=False, timeout=None):
+                 tls=False, smtps=False, timeout=None):
         self._conn = None
         self._host = host
         self._port = port
         self._login = login
         self._password = password
         self._tls = tls
+        self._smtps = smtps
         self._timeout = timeout
 
     @property
@@ -67,11 +68,13 @@ class SMTP(object):
             except (AttributeError, smtplib.SMTPServerDisconnected):
                 pass
 
+            protocol = smtplib.SMTP_SSL if self._smtps else smtplib.SMTP
+
             if self._timeout:
-                self._conn = smtplib.SMTP(self._host, self._port,
-                                          timeout=self._timeout)
+                self._conn = protocol(self._host, self._port,
+                                      timeout=self._timeout)
             else:
-                self._conn = smtplib.SMTP(self._host, self._port)
+                self._conn = protocol(self._host, self._port)
 
         if self._tls:
             self._conn.starttls()

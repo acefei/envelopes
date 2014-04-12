@@ -144,6 +144,12 @@ class MockSMTP(object):
         self.__append_call('quit', [], dict())
 
 
+class MockSMTPSSL(MockSMTP):
+    """A class that mocks ``smtp.SMTP_SSL``."""
+
+    default_port = smtplib.SMTP_SSL_PORT
+
+
 class BaseTestCase(object):
     """Base class for Envelopes test cases."""
 
@@ -163,9 +169,15 @@ class BaseTestCase(object):
         self._orig_smtp = smtplib.SMTP
         smtplib.SMTP = MockSMTP
 
+        self._orig_smtp_ssl = smtplib.SMTP_SSL
+        smtplib.SMTP_SSL = MockSMTPSSL
+
     def _unpatch_smtplib(self):
         if hasattr(self, '_orig_smtp'):
             smtplib.SMTP = self._orig_smtp
+
+        if hasattr(self, '_orig_smtp_ssl'):
+            smtplib.SMTP_SSL = self._orig_smtp_ssl
 
     def _dummy_message(self):
         return dict({

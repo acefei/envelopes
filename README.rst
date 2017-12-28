@@ -15,7 +15,8 @@ make working with outgoing e-mail in Python simple and fun.
 
 Installation
 -----
-.. sourcecode:: shell
+.. code-block::
+
     pip install https://github.com/acefei/envelopes/archive/master.zip
 
 

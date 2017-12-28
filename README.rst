@@ -12,6 +12,13 @@ About
 Envelopes is a wrapper for Python's *email* and *smtplib* modules. It aims to
 make working with outgoing e-mail in Python simple and fun.
 
+
+Installation
+-----
+.. sourcecode:: shell
+    pip install https://github.com/acefei/envelopes/archive/master.zip
+
+
 Short example
 -------------
 

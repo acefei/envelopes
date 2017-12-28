@@ -40,6 +40,7 @@ Features
 
 Envelopes allows you to easily:
 
+* Adds support for smtplib.SMTP_SSL
 * Provide e-mail addresses with or without name part.
 * Set text, HTML or both bodies according to your needs.
 * Provide any number of CC and BCC addresses.

@@ -35,6 +35,23 @@ Short example
     gmail = GMailSMTP('from@example.com', 'password')
     gmail.send(envelope)
 
+
+.. sourcecode:: python
+
+    from envelopes import Envelope
+
+    envelope = Envelope(
+        from_addr=(u'from@example.com', u'From Example'),
+        to_addr=(u'to@example.com', u'To Example'),
+        subject=u'Envelopes demo',
+        text_body=u"I'm a helicopter!"
+    )
+
+    # Send the envelope with smtp_ssl
+    envelope.send('smtp.exmail.qq.com', port=465, smtps=True,
+                  login='fei_su@hansight.com',
+                  password='password')
+    
 Features
 --------
 
